@@ -10,8 +10,7 @@
 #
 
 class Workout < ActiveRecord::Base
-  has_many :sets, 
-    :class_name => "WorkoutSet"
+  has_many :workout_sets
 
   belongs_to :user
 
@@ -19,7 +18,7 @@ class Workout < ActiveRecord::Base
     Workout.transaction do 
       workout = Workout.create!
       reps = rep_counts.map { |count| { :reps => count } }
-      workout.sets.create!(reps)
+      workout.workout_sets.create!(reps)
     end
   end
 
@@ -40,6 +39,6 @@ class Workout < ActiveRecord::Base
   end
 
   def total_reps
-    sets.sum(:reps)
+    workout_sets.sum(:reps)
   end
 end

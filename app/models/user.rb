@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   validates :email, :uniqueness => true
 
   has_many :workouts,
-    -> { order("completed_date DESC").includes(:sets) }
+    -> { order("completed_date DESC").includes(:workout_sets) }
 
   def self.id_for(user_or_id)
     user_or_id.try(:id) || user_or_id

@@ -22,7 +22,7 @@ class User
           .completed
           .where("completed_date >= ?", start_date)
           .where("completed_date <= ?", end_date)
-          .joins(:sets)
+          .joins(:workout_sets)
           .sum(:reps)
     end
 
