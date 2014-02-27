@@ -33,7 +33,8 @@ class FriendshipsController < ApplicationController
     id = friendship_params
 
     unless User.exists?(id)
-      render :json => { :errors => ["User with id #{id} does not exist"] }
+      render :json => { :errors => ["User with id #{id} does not exist"] },
+             :status => :unprocessable_entity
     end
   end
 end
