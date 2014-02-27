@@ -16,16 +16,11 @@ class User
       Message.conversation_between(self, user)
     end
 
-    def cheer(user)
-      Message.create_cheer(self, user)
-    end
-
-    def taunt(user)
-      Message.create_taunt(self, user)
-    end
-
-    def message(user, body)
-      Message.create_message(self, user, body)
+    # #cheer, #taunt, #message
+    Message::MESSAGE_TYPES.each do |type|
+      define_method(type.to_sym) do |user, body = nil|
+        Message.send("create_#{type}", self, user, body)
+      end
     end
 
     module ClassMethods
