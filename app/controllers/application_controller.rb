@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
 
   def require_user
     unless logged_in?
-      render :json => { :error => "must be logged in" },
+      render :json => { :errors => ["User must be logged in"] },
              :status => :forbidden
     end
   end
