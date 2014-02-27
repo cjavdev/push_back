@@ -25,6 +25,10 @@ class Message < ActiveRecord::Base
       define_method("#{type}s".to_sym) do
         where(:message_type => type)
       end
+
+      define_method("#{type}?".to_sym) do
+        self.message_type == type
+      end
     end
   
     def conversation_between(user_or_id1, user_or_id2)
