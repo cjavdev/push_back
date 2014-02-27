@@ -10,7 +10,8 @@
 #
 
 class Workout < ActiveRecord::Base
-  has_many :workout_sets
+  has_many :workout_sets,
+    -> { order("created_at DESC") }
 
   belongs_to :user
 
