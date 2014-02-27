@@ -16,25 +16,32 @@ class Friendship < ActiveRecord::Base
 
   validates :user_id, :friend_id, :presence => true
   validates :user_id, :uniqueness => { :scope => :friend_id }
+  validate :cant_friend_self
 
   def self.create_friendship(user_or_id1, user_or_id2)
     u1 = User.id_for(user_or_id1)
     u2 = User.id_for(user_or_id2)
 
     f1, f2 = nil, nil
-    Friendship.transaction do
-      f1 = Friendship.create!(
-        user_id: u1,
-        friend_id: u2
-      )
+    begin
+      Friendship.transaction do
+        f1 = Friendship.new(
+          user_id: u1,
+          friend_id: u2
+        )
 
-      f2 = Friendship.create!(
-        user_id: u2,
-        friend_id: u1
-      )
+        f2 = Friendship.new(
+          user_id: u2,
+          friend_id: u1
+        )
+
+        f1.save! && f2.save!
+      end
+    rescue
+      f1
+    else
+      f1
     end
-
-    f1
   end
 
   def self.destroy_friendship(user_or_id1, user_or_id2)
@@ -44,9 +51,21 @@ class Friendship < ActiveRecord::Base
     f1 = Friendship.find_by(:user_id => u1, :friend_id => u2)
     f2 = Friendship.find_by(:user_id => u2, :friend_id => u1)
 
-    Friendship.transaction do
-      f1.destroy!
-      f2.destroy!
+    begin
+      Friendship.transaction do
+        f1 && f1.destroy!
+        f2 && f2.destroy!
+      end
+    rescue
+      false
+    else
+      true
+    end
+  end
+
+  def cant_friend_self
+    if self.user_id == self.friend_id
+      errors[:user_id] << "can't friend self"
     end
   end
 end
