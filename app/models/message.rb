@@ -20,10 +20,25 @@ class Message < ActiveRecord::Base
   default_scope { order("created_at DESC") }
 
   class << self
-    # Scopes: messages, cheers, taunts
     MESSAGE_TYPES.each do |type|
+      # Scopes: messages, cheers, taunts
       define_method("#{type}s".to_sym) do
         where(:message_type => type)
+      end
+
+      # Factory methods: create_cheer, create_taunt, create_message
+      define_method("create_#{type}".to_sym) do |author_id, recipient_id, body = nil|
+        author_id = User.id_for(author_id)
+        recipient_id = User.id_for(recipient_id)
+
+        body = nil if ["cheer", "taunt"].include?(type)
+
+        Message.create(
+          :author_id => author_id,
+          :recipient_id => recipient_id,
+          :message_type => type,
+          :body => body
+        )
       end
     end
   
@@ -33,43 +48,10 @@ class Message < ActiveRecord::Base
 
       Message.where("(author_id = ? AND recipient_id = ?) OR (recipient_id = ? AND author_id = ?)", u1, u2, u1, u2)
     end
-
-    def create_cheer(author_id, recipient_id)
-      author_id = User.id_for(author_id)
-      recipient_id = User.id_for(recipient_id)
-
-      Message.create(
-        :author_id => author_id,
-        :recipient_id => recipient_id,
-        :message_type => "cheer"
-      )
-    end
-
-    def create_taunt(author_id, recipient_id)
-      author_id = User.id_for(author_id)
-      recipient_id = User.id_for(recipient_id)
-
-      Message.create(
-        :author_id => author_id,
-        :recipient_id => recipient_id,
-        :message_type => "taunt"
-      )
-    end
-
-    def create_message(author_id, recipient_id, body)
-      author_id = User.id_for(author_id)
-      recipient_id = User.id_for(recipient_id)
-
-      Message.create(
-        :author_id => author_id,
-        :recipient_id => recipient_id,
-        :body => body,
-        :message_type => "message"
-      )
-    end
   end
 
   MESSAGE_TYPES.each do |type|
+    # #taunt?, #cheer?, #message?
     define_method("#{type}?".to_sym) do
       self.message_type == type
     end
