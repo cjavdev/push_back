@@ -11,4 +11,17 @@
 #
 
 class User < ActiveRecord::Base
+  include Friendable
+  include WorkoutStats
+  include Messenger
+
+  validates :f_name, :l_name, :email, :presence => true
+  validates :email, :uniqueness => true
+
+  has_many :workouts,
+    -> { order("completed_date DESC").includes(:sets) }
+
+  def self.id_for(user_or_id)
+    user_or_id.try(:id) || user_or_id
+  end
 end

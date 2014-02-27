@@ -10,4 +10,7 @@
 #
 
 class WorkoutSet < ActiveRecord::Base
+  belongs_to :workout
+
+  validates :workout_id, :reps, :presence => true
 end
