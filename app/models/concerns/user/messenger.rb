@@ -13,15 +13,15 @@ class User
     end
 
     def cheer(user)
-      Message.create_cheer(self.id, user.id)
+      Message.create_cheer(self, user)
     end
 
     def taunt(user)
-      Message.create_taunt(self.id, user.id)
+      Message.create_taunt(self, user)
     end
 
     def message(user, body)
-      Message.create_message(self.id, user.id, body)
+      Message.create_message(self, user, body)
     end
 
     def conversation_with(user)
