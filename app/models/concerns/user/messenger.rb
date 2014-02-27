@@ -12,6 +12,10 @@ class User
         :foreign_key => :recipient_id
     end
 
+    def conversation_with(user)
+      Message.conversation_between(self, user)
+    end
+
     def cheer(user)
       Message.create_cheer(self, user)
     end
@@ -22,10 +26,6 @@ class User
 
     def message(user, body)
       Message.create_message(self, user, body)
-    end
-
-    def conversation_with(user)
-      Message.conversation_between(self, user)
     end
 
     module ClassMethods
