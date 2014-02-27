@@ -25,10 +25,6 @@ class Message < ActiveRecord::Base
       define_method("#{type}s".to_sym) do
         where(:message_type => type)
       end
-
-      define_method("#{type}?".to_sym) do
-        self.message_type == type
-      end
     end
   
     def conversation_between(user_or_id1, user_or_id2)
@@ -39,6 +35,9 @@ class Message < ActiveRecord::Base
     end
 
     def create_cheer(author_id, recipient_id)
+      author_id = User.id_for(author_id)
+      recipient_id = User.id_for(recipient_id)
+
       Message.create(
         :author_id => author_id,
         :recipient_id => recipient_id,
@@ -47,6 +46,9 @@ class Message < ActiveRecord::Base
     end
 
     def create_taunt(author_id, recipient_id)
+      author_id = User.id_for(author_id)
+      recipient_id = User.id_for(recipient_id)
+
       Message.create(
         :author_id => author_id,
         :recipient_id => recipient_id,
@@ -55,12 +57,21 @@ class Message < ActiveRecord::Base
     end
 
     def create_message(author_id, recipient_id, body)
+      author_id = User.id_for(author_id)
+      recipient_id = User.id_for(recipient_id)
+
       Message.create(
         :author_id => author_id,
         :recipient_id => recipient_id,
         :body => body,
         :message_type => "message"
       )
+    end
+  end
+
+  MESSAGE_TYPES.each do |type|
+    define_method("#{type}?".to_sym) do
+      self.message_type == type
     end
   end
 end
