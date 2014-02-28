@@ -15,13 +15,25 @@ class User < ActiveRecord::Base
   include WorkoutStats
   include Messenger
 
-  validates :f_name, :l_name, :email, :presence => true
-  validates :email, :uniqueness => true
+  before_validation :ensure_session_token
+
+  validates :f_name, :l_name, :email, :session_token, :presence => true
+  validates :email, :session_token, :uniqueness => true
 
   has_many :workouts,
     -> { order("completed_date DESC").includes(:workout_sets) }
 
   def self.id_for(user_or_id)
     user_or_id.try(:id) || user_or_id
+  end
+
+  private
+
+  def self.generate_session_token
+    SecureRandom.urlsafe_base64(16)
+  end
+
+  def ensure_session_token
+    self.session_token ||= self.class.generate_session_token
   end
 end
