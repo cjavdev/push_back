@@ -12,5 +12,6 @@
 class WorkoutSet < ActiveRecord::Base
   belongs_to :workout
 
-  validates :workout_id, :reps, :presence => true
+  validates :workout_id, :reps, presence: true
+  validates :reps, numericality: { only_integer: true, greater_than: 0 }
 end

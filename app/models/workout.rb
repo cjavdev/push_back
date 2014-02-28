@@ -10,25 +10,26 @@
 #
 
 class Workout < ActiveRecord::Base
-  has_many :sets, 
-    :class_name => "WorkoutSet"
+  has_many :workout_sets,
+    -> { order("created_at DESC") },
+    dependent: :destroy
 
   belongs_to :user
 
   def self.create_template_sets(rep_counts)
     Workout.transaction do 
       workout = Workout.create!
-      reps = rep_counts.map { |count| { :reps => count } }
-      workout.sets.create!(reps)
+      reps = rep_counts.map { |count| { reps: count } }
+      workout.workout_sets.create!(reps)
     end
   end
 
   def self.templates
-    where(:user_id => nil)
+    where(user_id: nil)
   end
 
   def self.completed
-    where.not(:completed_date => nil)
+    where.not(completed_date: nil)
   end
 
   def completed?
@@ -40,6 +41,6 @@ class Workout < ActiveRecord::Base
   end
 
   def total_reps
-    sets.sum(:reps)
+    workout_sets.sum(:reps)
   end
 end
