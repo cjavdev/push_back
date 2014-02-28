@@ -7,6 +7,7 @@ class User
       has_many :friends, :through => :friendships
 
       has_many :received_friend_requests,
+               -> { includes(:sender) },
                :class_name => "FriendRequest",
                :foreign_key => :recipient_id
 
