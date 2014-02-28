@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   include ErrorsHelper
   include SessionsHelper
 
+  private
 
   def set_default_response_format
     request.format = :json
