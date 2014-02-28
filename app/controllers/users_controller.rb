@@ -19,16 +19,21 @@ class UsersController < ApplicationController
   def create
     # Handle first-time Facebook Login
     # find or create user
+    # user = User.find_by(email: params[:email])
+    # user = User.create(user_params) unless user
     user = User.first
     login(user)
     render :show, locals: { user: user }
   end
 
   def update
+    current_user.update_attributes(user_params)
+    render :_user, locals: { user: current_user }
   end
 
   private
 
   def user_params
+    params.require(:user).permit(:f_name, :l_name, :email, :daily_goal)
   end
 end
