@@ -1,5 +1,6 @@
 class MessagesController < ApplicationController
-  before_action :ensure_message_type, 
+  before_action :require_user
+  before_action :ensure_message_type,
                 :ensure_friends,
                 only: :create
 

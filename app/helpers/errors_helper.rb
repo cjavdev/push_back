@@ -33,6 +33,8 @@ module ErrorsHelper
       exception: "#{e.class.name}",
       message: "#{e.message}"
     }
+    puts "#{e.class.name} : #{e.message}"
+    puts e.backtrace
     error_info[:trace] = e.backtrace[0, 10] if Rails.env.development?
     render json: error_info, status: 500
   end
