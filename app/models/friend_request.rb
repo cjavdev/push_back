@@ -1,12 +1,12 @@
 class FriendRequest < ActiveRecord::Base
   belongs_to :sender, 
-             :class_name => "User"
+             class_name: "User"
 
   belongs_to :recipient,
-             :class_name => "User"
+             class_name: "User"
 
-  validates :sender_id, :recipient_id, :presence => true
-  validates :sender_id, :uniqueness => { :scope => :recipient_id }
+  validates :sender_id, :recipient_id, presence: true
+  validates :sender_id, uniqueness: { scope: :recipient_id }
   validate :no_two_way_requests, 
            :recipient_exists, 
            :cant_request_self,
@@ -26,8 +26,8 @@ class FriendRequest < ActiveRecord::Base
 
   def no_two_way_requests
     # i.e. If request goes both ways, then friendship should be created
-    request = FriendRequest.exists?(:sender_id => self.recipient_id,
-                                    :recipient_id => self.sender_id)
+    request = FriendRequest.exists?(sender_id: self.recipient_id,
+                                    recipient_id: self.sender_id)
     if request
       errors[:recipient_id] << "cannot request friendship back"
     end
@@ -46,7 +46,7 @@ class FriendRequest < ActiveRecord::Base
   end
 
   def friendship_cant_exist
-    if Friendship.exists?(:user_id => sender_id, :friend_id => recipient_id)
+    if Friendship.exists?(user_id: sender_id, friend_id: recipient_id)
       errors[:sender_id] << "can't request friendship from a friend"
     end
   end

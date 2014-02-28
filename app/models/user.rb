@@ -17,8 +17,8 @@ class User < ActiveRecord::Base
 
   before_validation :ensure_session_token
 
-  validates :f_name, :l_name, :email, :session_token, :presence => true
-  validates :email, :session_token, :uniqueness => true
+  validates :f_name, :l_name, :email, :session_token, presence: true
+  validates :email, :session_token, uniqueness: true
 
   has_many :workouts,
     -> { order("completed_date DESC").includes(:workout_sets) }

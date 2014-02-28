@@ -16,13 +16,13 @@ module SessionsHelper
   def current_user
     @current_user ||= User.first
     # @current_user ||= User.find(2)
-    # @current_user ||= User.find_by(:session_token => session[:token])
+    # @current_user ||= User.find_by(session_token: session[:token])
   end
 
   def require_user
     unless logged_in?
-      render :json => { :errors => ["User must be logged in"] },
-             :status => :forbidden
+      render json: { errors: ["User must be logged in"] },
+             status: :forbidden
     end
   end
 end
