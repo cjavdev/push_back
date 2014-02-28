@@ -11,7 +11,8 @@
 
 class Workout < ActiveRecord::Base
   has_many :workout_sets,
-    -> { order("created_at DESC") }
+    -> { order("created_at DESC") },
+    :dependent => :destroy
 
   belongs_to :user
 

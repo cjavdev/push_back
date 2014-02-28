@@ -1,8 +1,5 @@
 json.id workout.id
 json.completed_date workout.completed_date
-json.workout_sets workout.workout_sets do |set|
-  json.id set.id
-  json.reps set.reps
-  json.workout_id set.workout_id
-  json.created_at set.created_at
+json.workout_sets do
+  json.array! workout.workout_sets, partial: 'workout_sets/workout_set', as: :set
 end
