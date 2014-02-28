@@ -4,8 +4,8 @@ PushBack::Application.routes.draw do
   resources :friendships, :only => [:index, :destroy]
   resources :friend_requests, :only => [:index, :create] do
     member do
-      get 'accept'
-      get 'deny'
+      post 'accept'
+      delete 'deny'
     end
   end
 

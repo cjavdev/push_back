@@ -24,7 +24,12 @@ class FriendRequestsController < ApplicationController
 
   def accept
     friendship = @request.accept
-    render 'friendships/_friendship', :locals => { :friendship => friendship }
+    if friendship.persisted?
+      render 'friendships/_friendship', :locals => { :friendship => friendship }
+    else
+      render :json => { :errors => friendship.errors.full_messages },
+             :status => :unprocessable_entity
+    end
   end
 
   def deny
