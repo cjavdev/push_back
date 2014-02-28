@@ -4,10 +4,10 @@ class UsersController < ApplicationController
   def show
     @user = User.where(id: current_user.id)
                 .limit(1)
-                .includes(:workouts, 
-                          friendships: [:friend], 
+                .includes(:workouts,
+                          friendships: [:friend],
                           received_friend_requests: [:sender])
                 .first
-    render 'users/show.json.jbuilder'
+    render :show
   end
 end
