@@ -9,9 +9,8 @@ class MessagesController < ApplicationController
   end
 
   def create
-    current_user.send(params[:message_type].to_sym, params[:friend_id], params[:body])
-    messages = current_user.conversation_with(params[:friend_id])
-    render :index, :locals => { :messages => messages }
+    message = current_user.send(params[:message_type].to_sym, params[:friend_id], params[:body])
+    render :_message, :locals => { :message => message }
   end
 
   private
