@@ -11,7 +11,9 @@ end
 json.received_friend_requests do
   json.array! @user.received_friend_requests do |request|
     json.id request.id
-    json.sender json.partial! 'users/user', user: request.sender
+    json.sender do
+      json.partial! 'users/user', user: request.sender
+    end
     json.created_at request.created_at
   end
 end

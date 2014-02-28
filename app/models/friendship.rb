@@ -63,6 +63,8 @@ class Friendship < ActiveRecord::Base
     end
   end
 
+  private
+
   def cant_friend_self
     if self.user_id == self.friend_id
       errors[:user_id] << "can't friend self"

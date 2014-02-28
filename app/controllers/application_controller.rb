@@ -5,11 +5,4 @@ class ApplicationController < ActionController::Base
   respond_to :json
 
   include SessionsHelper
-
-  def require_user
-    unless logged_in?
-      render :json => { :errors => ["User must be logged in"] },
-             :status => :forbidden
-    end
-  end
 end
