@@ -18,7 +18,7 @@ class User
 
     def accept_friendship(user_or_id)
       user_or_id = User.id_for(user_or_id)
-      request = FriendRequest.find_by(sender_id: user_or_id, 
+      request = FriendRequest.find_by(sender_id: user_or_id,
                                       recipient_id: self.id)
       return false unless request
 
@@ -30,7 +30,7 @@ class User
 
     def deny_friendship(user_or_id)
       user_or_id = User.id_for(user_or_id)
-      request = FriendRequest.find_by(sender_id: user_or_id, 
+      request = FriendRequest.find_by(sender_id: user_or_id,
                                       recipient_id: self.id)
       return false unless request
 
