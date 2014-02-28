@@ -27,6 +27,17 @@ class User < ActiveRecord::Base
     user_or_id.try(:id) || user_or_id
   end
 
+  # Dummy method!
+  def find_by_credentials(stuff)
+    User.first
+  end
+
+  def reset_session_token!
+    self.session_token = self.class.generate_session_token
+    self.save
+    self.session_token
+  end
+
   private
 
   def self.generate_session_token

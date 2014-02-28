@@ -1,6 +1,8 @@
 PushBack::Application.routes.draw do
   resource :user, :except => [:new, :edit]
 
+  resource :session, :only => [:create, :destroy]
+
   resources :friendships, :only => [:index, :destroy]
   resources :friend_requests, :only => [:index, :create] do
     member do
