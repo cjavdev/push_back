@@ -20,4 +20,6 @@ PushBack::Application.routes.draw do
   end
 
   resources :workout_sets, :only => [:destroy]
+
+  match "*xxxx", :to => "application#routing_error", :via => [:get, :post, :put, :patch, :delete]
 end
