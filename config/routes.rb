@@ -1,8 +1,13 @@
 PushBack::Application.routes.draw do
   resource :user, :except => [:new, :edit]
 
-  resources :friendships, :only => [:index, :create, :destroy]
-  resources :friend_requests, :only => [:index, :create]
+  resources :friendships, :only => [:index, :destroy]
+  resources :friend_requests, :only => [:index, :create] do
+    member do
+      get 'accept'
+      get 'deny'
+    end
+  end
 
   resources :friends, :only => [] do
     resources :messages, :only => [:index, :create]
