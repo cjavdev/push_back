@@ -4,6 +4,6 @@ class RemoveUniqueIndexOnFriendships < ActiveRecord::Migration
   end
 
   def down
-    add_index :friendships, [:user_id, :friend_id], :unique => true
+    add_index :friendships, [:user_id, :friend_id], unique: true
   end
 end

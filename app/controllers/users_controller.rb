@@ -5,8 +5,8 @@ class UsersController < ApplicationController
     @user = User.where(id: current_user.id)
                 .limit(1)
                 .includes(:workouts, 
-                          :friendships => [:friend], 
-                          :received_friend_requests => [:sender])
+                          friendships: [:friend], 
+                          received_friend_requests: [:sender])
                 .first
     render 'users/show.json.jbuilder'
   end

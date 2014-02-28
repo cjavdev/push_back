@@ -13,9 +13,9 @@
 
 class Message < ActiveRecord::Base
   MESSAGE_TYPES = %w(message cheer taunt)
-  validates :message_type, :inclusion => { :in => MESSAGE_TYPES }
+  validates :message_type, inclusion: { in: MESSAGE_TYPES }
 
-  validates :author_id, :recipient_id, :message_type, :presence => true
+  validates :author_id, :recipient_id, :message_type, presence: true
 
   default_scope { order("created_at DESC") }
 
@@ -23,7 +23,7 @@ class Message < ActiveRecord::Base
     MESSAGE_TYPES.each do |type|
       # Scopes: messages, cheers, taunts
       define_method("#{type}s".to_sym) do
-        where(:message_type => type)
+        where(message_type: type)
       end
 
       # Factory methods: create_cheer, create_taunt, create_message
@@ -34,10 +34,10 @@ class Message < ActiveRecord::Base
         body = nil if ["cheer", "taunt"].include?(type)
 
         Message.create(
-          :author_id => author_id,
-          :recipient_id => recipient_id,
-          :message_type => type,
-          :body => body
+          author_id: author_id,
+          recipient_id: recipient_id,
+          message_type: type,
+          body: body
         )
       end
     end

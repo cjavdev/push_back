@@ -12,10 +12,10 @@
 class Friendship < ActiveRecord::Base
   belongs_to :user
   belongs_to :friend,
-    :class_name => "User"
+    class_name: "User"
 
-  validates :user_id, :friend_id, :presence => true
-  validates :user_id, :uniqueness => { :scope => :friend_id }
+  validates :user_id, :friend_id, presence: true
+  validates :user_id, uniqueness: { scope: :friend_id }
   validate :cant_friend_self
 
   def self.create_friendship(user_or_id1, user_or_id2)
@@ -48,8 +48,8 @@ class Friendship < ActiveRecord::Base
     u1 = User.id_for(user_or_id1)
     u2 = User.id_for(user_or_id2)
 
-    f1 = Friendship.find_by(:user_id => u1, :friend_id => u2)
-    f2 = Friendship.find_by(:user_id => u2, :friend_id => u1)
+    f1 = Friendship.find_by(user_id: u1, friend_id: u2)
+    f2 = Friendship.find_by(user_id: u2, friend_id: u1)
 
     begin
       Friendship.transaction do

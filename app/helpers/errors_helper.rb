@@ -12,28 +12,28 @@ module ErrorsHelper
 
   def routing_error
     error_info = {
-      :error => "No such route exists"
+      error: "No such route exists"
     }
-    render :json => error_info, :status => 404
+    render json: error_info, status: 404
   end
 
   def not_found(exception)
     error_info = {
-      :error => "Resource Not Found",
-      :exception => "#{e.class.name}",
-      :message => "#{e.message}"
+      error: "Resource Not Found",
+      exception: "#{e.class.name}",
+      message: "#{e.message}"
     }
     error_info[:trace] = e.backtrace[0, 10] if Rails.env.development?
-    render :json => error_info, :status => 404
+    render json: error_info, status: 404
   end
 
   def error(e)
     error_info = {
-      :error => "Internal Server Error",
-      :exception => "#{e.class.name}",
-      :message => "#{e.message}"
+      error: "Internal Server Error",
+      exception: "#{e.class.name}",
+      message: "#{e.message}"
     }
     error_info[:trace] = e.backtrace[0, 10] if Rails.env.development?
-    render :json => error_info, :status => 500
+    render json: error_info, status: 500
   end
 end

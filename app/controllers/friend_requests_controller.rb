@@ -1,40 +1,40 @@
 class FriendRequestsController < ApplicationController
   before_action :require_user
   before_action :ensure_recipient_id,
-                :only => [:create]
+                only: [:create]
   before_action :find_request,
                 :ensure_own_request,
-                :only => [:accept, :deny]
+                only: [:accept, :deny]
 
   def index
     requests = current_user.received_friend_requests
-    render :index, :locals => { :requests => requests }
+    render :index, locals: { requests: requests }
   end
 
   def create
-    request = current_user.sent_friend_requests.new(:recipient_id => params[:recipient_id])
+    request = current_user.sent_friend_requests.new(recipient_id: params[:recipient_id])
 
     if request.save
-      render :json => { :success => "Friendship requested" }
+      render json: { success: "Friendship requested" }
     else
-      render :json => { :errors => request.errors.full_messages },
-             :status => :unprocessable_entity
+      render json: { errors: request.errors.full_messages },
+             status: :unprocessable_entity
     end
   end
 
   def accept
     friendship = @request.accept
     if friendship.persisted?
-      render 'friendships/_friendship', :locals => { :friendship => friendship }
+      render 'friendships/_friendship', locals: { friendship: friendship }
     else
-      render :json => { :errors => friendship.errors.full_messages },
-             :status => :unprocessable_entity
+      render json: { errors: friendship.errors.full_messages },
+             status: :unprocessable_entity
     end
   end
 
   def deny
     @request.deny
-    render :json => { :success => "Friend request denied" }
+    render json: { success: "Friend request denied" }
   end
 
   private
@@ -49,8 +49,8 @@ class FriendRequestsController < ApplicationController
 
   def ensure_own_request
     unless current_user.id == @request.recipient_id
-      render :json => { :erorrs => ["This request was not sent to the current user"] },
-             :status => :unprocessable_entity
+      render json: { erorrs: ["This request was not sent to the current user"] },
+             status: :unprocessable_entity
     end
   end
 end

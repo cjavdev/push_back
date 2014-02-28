@@ -4,12 +4,12 @@ class User
 
     included do
       has_many :authored_messages,
-        :class_name => "Message",
-        :foreign_key => :author_id
+        class_name: "Message",
+        foreign_key: :author_id
 
       has_many :received_messages,
-        :class_name => "Message",
-        :foreign_key => :recipient_id
+        class_name: "Message",
+        foreign_key: :recipient_id
     end
 
     def conversation_with(user)

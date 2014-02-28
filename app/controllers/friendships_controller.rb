@@ -3,12 +3,12 @@ class FriendshipsController < ApplicationController
 
   def index
     friendships = current_user.friendships.includes(:friend)
-    render :index, :locals => { :friendships => friendships }
+    render :index, locals: { friendships: friendships }
   end
 
   def destroy
     Friendship.find(params[:id]).try(:destroy)
-    render :json => { :success => "Unfriended" }
+    render json: { success: "Unfriended" }
   end
 
   private
