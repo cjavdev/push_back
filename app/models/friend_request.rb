@@ -13,6 +13,18 @@ class FriendRequest < ActiveRecord::Base
     where(:pending => true)
   end
 
+  def accept
+    friendship = Friendship.create_friendship(recipient_id, sender_id)
+    self.destroy
+    friendship
+  end
+
+  def deny
+    self.destroy
+  end
+
+  private
+
   def no_two_way_requests
     # i.e. If request goes both ways, then friendship should be created
     request = FriendRequest.exists?(:sender_id => self.recipient_id,
