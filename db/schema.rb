@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20140228013401) do
   create_table "friend_requests", force: true do |t|
     t.integer  "sender_id"
     t.integer  "recipient_id"
-    t.boolean  "pending",      default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

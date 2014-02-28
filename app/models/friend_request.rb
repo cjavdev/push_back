@@ -12,10 +12,6 @@ class FriendRequest < ActiveRecord::Base
            :cant_request_self,
            :friendship_cant_exist
 
-  def self.pending
-    where(:pending => true)
-  end
-
   def accept
     friendship = Friendship.create_friendship(recipient_id, sender_id)
     self.destroy if friendship.persisted?

@@ -3,7 +3,6 @@ class CreateFriendRequests < ActiveRecord::Migration
     create_table :friend_requests do |t|
       t.integer :sender_id
       t.integer :recipient_id
-      t.boolean :pending, :default => true
 
       t.timestamps
     end
