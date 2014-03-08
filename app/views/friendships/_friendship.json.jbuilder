@@ -1,6 +1,7 @@
 json.id friendship.id
+json.friend_id friendship.friend_id
 
-json.friend do 
+json.friend do
   json.partial! 'users/user', user: friendship.friend
 end
 
