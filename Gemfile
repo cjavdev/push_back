@@ -50,4 +50,8 @@ group :development, :test do
   gem 'rspec-rails'
 end
 
+group :development do
+  gem 'rack-cors', :require => 'rack/cors'
+end
+
 gem 'redis'
