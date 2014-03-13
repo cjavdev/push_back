@@ -2,12 +2,14 @@
 #
 # Table name: users
 #
-#  id         :integer          not null, primary key
-#  f_name     :string(255)
-#  l_name     :string(255)
-#  email      :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id            :integer          not null, primary key
+#  f_name        :string(255)
+#  l_name        :string(255)
+#  email         :string(255)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  daily_goal    :integer
+#  session_token :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -20,6 +22,7 @@ class User < ActiveRecord::Base
   validates :f_name, :l_name, :email, :session_token, presence: true
   validates :email, :session_token, uniqueness: true
 
+  has_many :authorizations, dependent: :destroy
   has_many :workouts,
     -> { order("completed_date DESC").includes(:workout_sets) }
 

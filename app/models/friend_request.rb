@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: friend_requests
+#
+#  id           :integer          not null, primary key
+#  sender_id    :integer
+#  recipient_id :integer
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
 class FriendRequest < ActiveRecord::Base
   belongs_to :sender, 
              class_name: "User"
