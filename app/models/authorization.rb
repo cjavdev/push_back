@@ -16,4 +16,17 @@
 
 class Authorization < ActiveRecord::Base
   belongs_to :user
+
+  def self.build_from_json!(data)
+    Authorization.new(scrub_fb_authorization_data(data))
+  end
+
+  def self.scrub_fb_authorization_data(data)
+    {
+     uid: data[:id],
+     token: data[:authResponse][:accessToken],
+     name: data[:name],
+     link: data[:link]
+    }
+  end
 end
