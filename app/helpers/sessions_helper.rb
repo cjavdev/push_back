@@ -14,8 +14,6 @@ module SessionsHelper
   end
 
   def current_user
-    # @current_user ||= User.first
-    # @current_user ||= User.find(2)
     @current_user ||= User.find_by(session_token: session[:token])
   end
 
