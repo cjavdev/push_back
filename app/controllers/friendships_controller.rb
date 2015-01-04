@@ -1,5 +1,5 @@
 class FriendshipsController < ApplicationController
-  before_action :require_user 
+  before_action :require_user
 
   def index
     friendships = current_user.friendships.includes(:friend)
@@ -12,7 +12,7 @@ class FriendshipsController < ApplicationController
   end
 
   private
-    
+
   def friendship_params
     params.require(:friend_id)
   end
