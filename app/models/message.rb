@@ -41,7 +41,7 @@ class Message < ActiveRecord::Base
         )
       end
     end
-  
+
     def conversation_between(user_or_id1, user_or_id2)
       u1 = User.id_for(user_or_id1)
       u2 = User.id_for(user_or_id2)

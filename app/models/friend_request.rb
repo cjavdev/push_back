@@ -10,18 +10,15 @@
 #
 
 class FriendRequest < ActiveRecord::Base
-  belongs_to :sender, 
-             class_name: "User"
-
-  belongs_to :recipient,
-             class_name: "User"
-
   validates :sender_id, :recipient_id, presence: true
   validates :sender_id, uniqueness: { scope: :recipient_id }
-  validate :no_two_way_requests, 
-           :recipient_exists, 
+  validate :no_two_way_requests,
+           :recipient_exists,
            :cant_request_self,
            :friendship_cant_exist
+
+  belongs_to :sender, class_name: "User"
+  belongs_to :recipient, class_name: "User"
 
   def accept
     friendship = Friendship.create_friendship(recipient_id, sender_id)

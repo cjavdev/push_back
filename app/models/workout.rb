@@ -10,14 +10,11 @@
 #
 
 class Workout < ActiveRecord::Base
-  has_many :workout_sets,
-    -> { order("created_at DESC") },
-    dependent: :destroy
-
+  has_many :workout_sets, -> { order("created_at DESC") }, dependent: :destroy
   belongs_to :user
 
   def self.create_template_sets(rep_counts)
-    Workout.transaction do 
+    Workout.transaction do
       workout = Workout.create!
       reps = rep_counts.map { |count| { reps: count } }
       workout.workout_sets.create!(reps)

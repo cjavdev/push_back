@@ -10,13 +10,12 @@
 #
 
 class Friendship < ActiveRecord::Base
-  belongs_to :user
-  belongs_to :friend,
-    class_name: "User"
-
   validates :user_id, :friend_id, presence: true
   validates :user_id, uniqueness: { scope: :friend_id }
   validate :cant_friend_self
+
+  belongs_to :user
+  belongs_to :friend, class_name: "User"
 
   def self.create_friendship(user_or_id1, user_or_id2)
     u1 = User.id_for(user_or_id1)
