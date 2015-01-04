@@ -23,10 +23,10 @@ class Authorization < ActiveRecord::Base
 
   def self.scrub_fb_authorization_data(data)
     {
-     uid: data[:id],
-     token: data[:authResponse][:accessToken],
-     name: data[:name],
-     link: data[:link]
+      uid: data.fetch(:id),
+      token: data.fetch(:authResponse).fetch(:token),
+      name: data.fetch(:name),
+      link: data.fetch(:link)
     }
   end
 end
