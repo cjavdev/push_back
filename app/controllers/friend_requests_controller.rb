@@ -1,7 +1,5 @@
 class FriendRequestsController < ApplicationController
   before_action :require_user
-  before_action :ensure_recipient_id,
-                only: [:create]
   before_action :find_request,
                 :ensure_own_request,
                 only: [:accept, :deny]
@@ -13,7 +11,7 @@ class FriendRequestsController < ApplicationController
 
   def create
     invitation = Invitation.new(current_user, params.require(:email))
-    request = current_user.sent_friend_requests.new(recipient_id: params[:recipient_id])
+    # request = current_user.sent_friend_requests.new(recipient_id: params[:recipient_id])
 
     if invitation.save
       render json: { success: "Friendship requested" }
@@ -39,10 +37,6 @@ class FriendRequestsController < ApplicationController
   end
 
   private
-
-  def ensure_recipient_id
-    params.require(:recipient_id)
-  end
 
   def find_request
     @request = FriendRequest.find(params[:id])

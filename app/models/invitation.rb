@@ -21,6 +21,11 @@ class Invitation
   end
 
   def valid?
+    validate!
+    errors.empty?
+  end
+
+  def validate!
     unless to_user
       errors.push('Recipient not found')
     end
