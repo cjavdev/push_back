@@ -26,7 +26,8 @@ class Authorization < ActiveRecord::Base
       uid: data.fetch(:id),
       token: data.fetch(:authResponse).fetch(:token),
       name: data.fetch(:name),
-      link: data.fetch(:link)
+      link: data.fetch(:link),
+      provider: :facebook
     }
   end
 end

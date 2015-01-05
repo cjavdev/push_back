@@ -1,5 +1,7 @@
 json.partial! 'users/user', user: user
 
+json.fbid user.authorizations.find_by(provider: :facebook).try(:uid)
+
 json.friendships do
   json.array! user.friendships, partial: 'friendships/friendship', as: :friendship
 end
