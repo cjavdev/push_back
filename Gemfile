@@ -14,7 +14,10 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'letter_opener'
+  gem 'launchy'
 end
 
 gem 'rack-cors', require: 'rack/cors'
 gem 'redis'
+gem 'newrelic_rpm'

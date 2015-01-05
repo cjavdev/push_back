@@ -12,9 +12,10 @@ class FriendRequestsController < ApplicationController
   end
 
   def create
+    invitation = Invitation.new(current_user, params.require(:email))
     request = current_user.sent_friend_requests.new(recipient_id: params[:recipient_id])
 
-    if request.save
+    if invitation.save
       render json: { success: "Friendship requested" }
     else
       render json: { errors: request.errors.full_messages },
