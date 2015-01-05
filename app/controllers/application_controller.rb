@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :null_session, :if => Proc.new { |c| c.request.format == 'application/json' }
 
   before_action :set_default_response_format
+  before_action :set_session_token_from_header
   respond_to :json
 
   include ErrorsHelper
@@ -15,5 +16,10 @@ class ApplicationController < ActionController::Base
 
   def set_default_response_format
     request.format = :json
+  end
+
+  def set_session_token_from_header
+    session[:token] = request.headers["AuthToken-X"]
+    puts "Just set session token to: #{ session[:token] }"
   end
 end
