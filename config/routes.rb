@@ -1,8 +1,6 @@
 PushBack::Application.routes.draw do
   root to: "users#show"
-
   resource :user, except: [:new, :edit]
-
   resource :session, only: [:create, :destroy]
 
   resources :friendships, only: [:index, :destroy]

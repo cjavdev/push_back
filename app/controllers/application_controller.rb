@@ -19,7 +19,6 @@ class ApplicationController < ActionController::Base
   end
 
   def set_session_token_from_header
-    session[:token] = request.headers["AuthToken-X"]
-    puts "Just set session token to: #{ session[:token] }"
+    session[:token] ||= request.headers["AuthToken-X"]
   end
 end
