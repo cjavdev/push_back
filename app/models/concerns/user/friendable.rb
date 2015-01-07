@@ -12,6 +12,7 @@ class User < ActiveRecord::Base
         foreign_key: :recipient_id
 
       has_many :sent_friend_requests,
+        -> { includes(:recipient) },
         class_name: "FriendRequest",
         foreign_key: :sender_id
     end

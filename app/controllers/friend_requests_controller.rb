@@ -5,7 +5,12 @@ class FriendRequestsController < ApplicationController
                 only: [:accept, :deny]
 
   def index
-    requests = current_user.received_friend_requests
+    if params[:type] == "sent"
+      requests = current_user.sent_friend_requests
+    else
+      requests = current_user.received_friend_requests
+    end
+
     render :index, locals: { requests: requests }
   end
 

@@ -6,4 +6,4 @@ json.daily_goal user.daily_goal
 json.lifetime_total user.lifetime_total
 json.last_rep_count user.last_rep_count
 json.seven_day_count user.seven_day_count
-json.session_token user.session_token
+json.fbid user.authorizations.find_by(provider: :facebook).try(:uid)
