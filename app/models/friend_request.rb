@@ -30,6 +30,14 @@ class FriendRequest < ActiveRecord::Base
     self.destroy
   end
 
+  def self.build_for_user_and_fbid(user, fbid)
+    recipient_auth = Authorization.find_by(uid: fbid)
+    return FriendRequest.new if recipient_auth.nil?
+
+    recipient = recipient_auth.user
+    FriendRequest.new(sender: user, recipient: recipient)
+  end
+
   private
 
   def no_two_way_requests
