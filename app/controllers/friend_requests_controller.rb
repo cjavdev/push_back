@@ -20,8 +20,7 @@ class FriendRequestsController < ApplicationController
     if req.save
       render json: { success: "Friendship requested" }
     else
-      render json: { errors: request.errors.full_messages },
-             status: :unprocessable_entity
+      render json: { errors: req.errors.full_messages }, status: 422
     end
   end
 
@@ -30,8 +29,7 @@ class FriendRequestsController < ApplicationController
     if friendship.persisted?
       render json: friendship
     else
-      render json: { errors: friendship.errors.full_messages },
-             status: :unprocessable_entity
+      render json: { errors: friendship.errors.full_messages }, status: 422
     end
   end
 
