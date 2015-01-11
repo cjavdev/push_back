@@ -3,6 +3,7 @@
   <head>
     <title>Pushbit</title>
     <link rel="stylesheet" href="/assets/application.css"></link>
+    <script src="https://code.jquery.com/jquery-2.1.1.js"></script>
   </head>
   <body>
     <section class="hero mobile-hero">
@@ -26,5 +27,12 @@
         </div>
       </div>
     </section>
+    <script>
+      $(function () {
+        $('a > img').on('click', function () {
+          alert("Want in on the beta? Email me at cjavilla@gmail.com");
+        });
+      });
+    </script>
   </body>
 </html>
