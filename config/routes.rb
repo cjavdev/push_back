@@ -11,6 +11,8 @@ PushBack::Application.routes.draw do
     end
   end
 
+  resources :friend_invitations, only: [:create]
+
   resources :friends, only: [] do
     resources :messages, only: [:index, :create]
   end
