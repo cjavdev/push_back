@@ -1,4 +1,51 @@
 @import "bootswatch/superhero/variables";
 @import "bootstrap";
-body { padding-top: 60px; }
 @import "bootswatch/superhero/bootswatch";
+
+.hero.mobile-hero {
+    padding-top: 50px;
+    img {
+      max-height: 700px;
+      margin: 0 auto;
+      display: block;
+    }
+}
+
+#phone {
+  height: 800px;
+  background-size: auto 700px;
+  > img {
+    position: absolute;
+    left: 59px;
+    z-index: 1;
+  }
+  .screens {
+    position: absolute;
+    left: 81px;
+    top: 86px;
+    z-index: 10;
+
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    margin: 0 auto;
+
+    background-color: yellow;
+    height: 528px;
+    width: 297px;
+    .screen {
+      background-color: blue;
+      height: 528px;
+      width: 297px;
+      img {
+        height: 100%;
+        width: 100%;
+      }
+      &:not(.active) {
+        display: none;
+      }
+    }
+  }
+}
+

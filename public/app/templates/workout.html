@@ -1,0 +1,28 @@
+<ion-view view-title="Pushbit" ng-controller="WorkoutCtrl">
+  <ion-content>
+    <div ng-click="push()" ng-class="{ 'row': true, 'pulse': pulse,
+      'push': true }">
+      <div class="col col-80 col-offset-10">
+        <div class="big-circle workout-btn">
+          <p>PUSH!</p>
+        </div>
+      </div>
+    </div>
+    <div class="pushup-count">
+      <p>{{ reps }}</p>
+    </div>
+    <ul>
+      <li ng-repeat="set in sets">
+        Set {{ $index + 1 }}: {{ set.reps }}
+      </li>
+    </ul>
+  </ion-content>
+  <ion-footer-bar class="bar-balanced">
+    <button class="button button-clear" ng-click="completeSet()">
+      Set Completed
+    </button>
+    <button ng-click="completeWorkout()" class="button button-clear">
+      Workout Completed
+    </button>
+  </ion-footer-bar>
+</ion-view>

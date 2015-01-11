@@ -1,0 +1,29 @@
+<div class="modal" ng-controller="FriendshipsCtrl">
+  <ion-header-bar class="bar-balanced">
+    <h1 class="title">Challenge Friends</h1>
+    <button class="button button-clear" ng-click="done()">
+      Done
+    </button>
+  </ion-header-bar>
+  <ion-content has-header="true" padding="true">
+    <form ng-submit="inviteFriend(friend.email)">
+      <div class="list">
+        <label class="item item-input">
+          <input type="email" name="email" ng-model="friend.email" placeholder="Email">
+        </label>
+        <button type="submit" class="button button-full button-energized">
+          Invite!
+        </button>
+      </div>
+    </form>
+    <ion-list>
+      <ion-item class="item-avatar item-icon-right" ng-repeat="contact in contacts | challengable2">
+        <img ng-src="{{ contact.face() }}"/>
+        <h2>{{ contact.name() }}</h2>
+        <i ng-show="pending(contact.id)">Pending</i>
+        <i ng-hide="pending(contact.id)" ng-click="challengeContact(contact)" class="icon ion-ios-plus-outline"></i>
+        </button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</div>

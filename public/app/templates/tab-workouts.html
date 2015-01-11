@@ -1,0 +1,17 @@
+<ion-view view-title="Pushbit">
+  <ion-content>
+    <div ng-click="startNewWorkout()" class="row">
+      <div class="col col-80 col-offset-10">
+        <div class="big-circle start-workout">
+          <p>Start Workout!</p>
+        </div>
+      </div>
+    </div>
+    <ul class="list">
+      <li ng-repeat="workout in workouts | reverse" class="item">
+        {{ workout.totalReps() }} Reps
+        <span class="item-note">{{ workout.completedAt() }}</span>
+      </li>
+    </ul>
+  </ion-content>
+</ion-view>

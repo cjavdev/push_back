@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="http://code.ionicframework.com/ionicons/2.0.0/css/ionicons.min.css" rel="stylesheet">
+    <link
+    href='http://fonts.googleapis.com/css?family=Bitter:400,700,400italic'
+    rel='stylesheet' type='text/css'>
+    <link href="css/ionic.app.css" rel="stylesheet">
+    <script src="js/traceur.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <script>
+      traceur.options.experimental = true;
+    </script>
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+    <script src="js/openfb.js"></script>
+    <script src="js/lodash.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/all.js"></script>
+  </head>
+  <body ng-app="push">
+    <div ng-controller="BaseCtrl">
+      <!--
+        The nav bar that will be updated as we navigate between views.
+      -->
+      <ion-nav-bar class="bar-balanced">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+      </ion-nav-bar>
+      <!--
+        The views will be rendered in the <ion-nav-view> directive below
+        Templates are in the /templates folder (but you could also
+        have templates inline in this html file if you'd like).
+      -->
+      <ion-nav-view></ion-nav-view>
+    </div>
+  </body>
+</html>
