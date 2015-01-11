@@ -5,7 +5,7 @@ class FriendInvitationsController < ApplicationController
     if @invitation.save
       render json: @invitation
     else
-      render json: @invitation.errors.full_messages, status: :unprocessable_entity
+      render json: @invitation.errors
     end
   end
 end
