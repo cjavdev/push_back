@@ -2,10 +2,22 @@
 <html>
   <head>
     <title>Pushbit</title>
+    <link rel="stylesheet" href="/assets/application.css"></link>
   </head>
   <body>
-    <h1>Pushbit!</h1>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6 col-md-6">
+          <h1>Pushbit!</h1>
 
-    <p>Colaboratively pushing up!</p>
+          <p>Colaboratively pushing up!</p>
+        </div>
+        <div class="col-sm-6 col-md-6">
+          <%= image_tag("iphone6.png") %>
+          <iframe src="/app/index.html" frameBorder="0" class="screens">
+          </iframe>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

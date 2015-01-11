@@ -21,3 +21,5 @@ end
 gem 'rack-cors', require: 'rack/cors'
 gem 'redis'
 gem 'newrelic_rpm'
+gem 'bootstrap-sass'
+gem 'bootswatch-rails'
